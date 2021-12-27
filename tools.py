@@ -65,7 +65,7 @@ def linear_assumption(model, features, label):
     plt.plot(line_coords, line_coords,  # X and y points
              color='darkorange', linestyle='--')
     plt.title('Actual vs. Predicted')
-    plt.show()
+    #plt.show()
 
 def normal_errors_assumption(model, features, label, p_value_thresh=0.05):
     """
@@ -96,7 +96,7 @@ def normal_errors_assumption(model, features, label, p_value_thresh=0.05):
     plt.subplots(figsize=(12, 6))
     plt.title('Distribution of Residuals')
     sns.distplot(df_results['Residuals'])
-    plt.show()
+    #plt.show()
     
     print()
     if p_value > p_value_thresh:
@@ -208,7 +208,7 @@ def homoscedasticity_assumption(model, features, label):
     ax.spines['right'].set_visible(False)  # Removing the right spine
     ax.spines['top'].set_visible(False)  # Removing the top spine
     plt.title('Residuals')
-    plt.show()  
+    #plt.show()  
 
 
 

@@ -53,7 +53,7 @@ df_2 = data.iloc[subset:,:]
 y = df_2["Salary"]
 x = df_2.drop(["Salary"], axis=1)
 
-tools.outliers(y)
+#tools.outliers(y)
 '''
 scaler1 = StandardScaler()
 scaler2 = StandardScaler()
@@ -63,11 +63,13 @@ scaler2.fit(y)
 x = scaler1.transform(x)
 y = scaler2.transform(y)
 '''
-#t2.test_type2(x,y)
+
+t2.test_type2(x,y)
 
 #x = x.drop(["GraduationYear","Specialization","extraversion","ComputerProgramming","CollegeCityTier", "Logical", "openess_to_experience"], axis=1)
 
 salary_model = LinearRegression()
+salary_model2 = LinearRegression()
 '''
 scaler1 = StandardScaler()
 scaler2 = StandardScaler()
@@ -89,16 +91,33 @@ print(x_test.head())
 x_test = x
 y_test = y
 name_save = 'type2'
+tab=["GraduationYear","Specialization","extraversion","ComputerProgramming","CollegeCityTier", "Logical", "openess_to_experience"]
+plt.figure(figsize=(20,10))
+x=x_test.drop(tab, axis=1)
+salary_model2.fit(x, y)
+
+print(salary_model2.coef_)
+'''
+tools.linear_assumption(salary_model2, x, y_test)
+tools.linear_assumption(salary_model, x_test, y_test)
+plt.show()
+
+plt.figure(figsize=(20,10))
+x=x_test.drop(tab, axis=1)
+tools.homoscedasticity_assumption(salary_model2, x, y_test)
+tools.homoscedasticity_assumption(salary_model, x_test, y_test)
+plt.show()
+
 
 print("#############################################################################")
 print("#############################################################################")
-print(tools.calculate_residuals(salary_model, x_test, y_test))
+#print(tools.calculate_residuals(salary_model, x_test, y_test))
 print("#############################################################################")
 print("#############################################################################")
-tools.linear_assumption(salary_model, x_test, y_test)
+#tools.linear_assumption(salary_model, x_test, y_test)
 print("#############################################################################")
 print("#############################################################################")
-tools.normal_errors_assumption(salary_model, x_test, y_test)
+#tools.normal_errors_assumption(salary_model, x_test, y_test)
 print("#############################################################################")
 print("#############################################################################")
 tools.multicollinearity_assumption(salary_model, x_test, y_test)
@@ -107,8 +126,9 @@ print("#########################################################################
 tools.autocorrelation_assumption(salary_model, x_test, y_test)
 print("#############################################################################")
 print("#############################################################################")
-tools.homoscedasticity_assumption(salary_model, x_test, y_test)
+#tools.homoscedasticity_assumption(salary_model, x_test, y_test)
 print("#############################################################################")
 print("#############################################################################")
 
 
+'''

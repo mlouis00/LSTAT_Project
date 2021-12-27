@@ -25,14 +25,16 @@ import tools
 
 def test_type2(x,y):
     #x, y = np.array(x), np.array(y)
-    x = sm.add_constant(x)
-    drop_list = [12,8,20,15,9,11,18]
-    #drop_list = []
+    #drop_list = [12,8,20,15,9,11,18]
+    x_update = x
+    drop_list = ["GraduationYear","Specialization","extraversion","ComputerProgramming","CollegeCityTier", "Logical", "openess_to_experience"]
+    x_update = sm.add_constant(x_update)
     for i in drop_list:
-        x = np.delete(x, i, axis=1)
-    model = sm.OLS(y, x)
+        #x_update = np.delete(x_update, i, axis=1)
+        #x_update.reset_index(drop=True, inplace=True)
+        x_update = x_update.drop(i, axis=1)
+    model = sm.OLS(endog = y, exog = x_update)
     results = model.fit()
-    #print(model.feature_names_in_)
     print(results.summary())
     '''
     '''
@@ -41,3 +43,4 @@ def test_type2(x,y):
     print('adjusted coefficient of determination:', results.rsquared_adj)
 
     print('regression coefficients:', results.params)
+    print('regression coefficients:', results)
